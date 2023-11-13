@@ -1,3 +1,8 @@
+
+
+
+
+
 function api(){
     fetch('https://fakestoreapi.com/products',{
       method: "get"
@@ -33,5 +38,4 @@ function api(){
   }
   
   api() 
-  
-  
+
