@@ -66,8 +66,20 @@ function myAPI(){
         let password = document.getElementById("password").value
         let email = document.getElementById("email").value
         if(nameCheck(name) && passwordCheck(password) && emailCheck(email)){
-
-          fetch("https://65524db75c69a7790329dc3e.mockapi.io/users", {
+          let notFound=false
+          fetch("https://65524db75c69a7790329dc3e.mockapi.io/users")
+          .then((response) => response.json())
+          .then((data) =>{
+            for(let i=0; i<data.length;i++){
+              if(data[i].email==email){
+                notFound=false;
+            }
+            else{
+              notFound=true;
+            }
+          }})
+             
+          if(notFound){ fetch("https://65524db75c69a7790329dc3e.mockapi.io/users", {
               method: 'POST',
               body: JSON.stringify({
                   name,
@@ -81,7 +93,10 @@ function myAPI(){
               .then((response) => response.json())
               .then((json) => console.log(json));
                
-              window.open('Store.html')
+              window.open('Store.html')}
+              else{
+                alert('Email already exsits!')
+              }
 
             }
       })
